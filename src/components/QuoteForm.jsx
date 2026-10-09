@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Mail, CheckCircle2, Globe, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, Mail, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { productCategories } from '../data/products';
 
 const QuoteForm = ({ selectedProduct }) => {
@@ -49,7 +49,7 @@ const QuoteForm = ({ selectedProduct }) => {
           'Full Name': formData.fullName,
           'Company Name': formData.companyName,
           'Email Address': formData.email,
-          'Phone Number': formData.phoneWhatsApp,
+          'Phone / WhatsApp': formData.phoneWhatsApp,
           'Destination Country': formData.country,
           'Product Category': formData.productCategory,
           'Estimated Quantity': formData.quantity || 'Not Specified',
@@ -79,7 +79,7 @@ const QuoteForm = ({ selectedProduct }) => {
       `Full Name: ${formData.fullName}\n` +
       `Company: ${formData.companyName}\n` +
       `Email: ${formData.email}\n` +
-      `Phone Number: ${formData.phoneWhatsApp}\n` +
+      `Phone/WhatsApp: ${formData.phoneWhatsApp}\n` +
       `Destination: ${formData.country}\n` +
       `Product Category: ${formData.productCategory}\n` +
       `Estimated Quantity: ${formData.quantity}\n\n` +
@@ -88,16 +88,6 @@ const QuoteForm = ({ selectedProduct }) => {
 
     window.location.href = `mailto:export@purepackglobal.com?subject=${emailSubject}&body=${emailBody}`;
   };
-
-  /* 
-  WhatsApp direct launcher commented out for now
-  const handleWhatsAppDirect = () => {
-    const text = encodeURIComponent(
-      `Hello Pure Pack Global Trade Team,\n\nI would like to inquire about ${formData.productCategory || 'Rice / Grocery / Packaging exports'}.\nFull Name: ${formData.fullName || 'N/A'}\nCompany: ${formData.companyName || 'N/A'}\nDestination: ${formData.country || 'N/A'}\nDetails: ${formData.message || 'N/A'}`
-    );
-    window.open(`https://wa.me/?text=${text}`, '_blank');
-  };
-  */
 
   return (
     <section id="quote" className="section-spacing quote-section">
@@ -115,8 +105,8 @@ const QuoteForm = ({ selectedProduct }) => {
           </p>
         </div>
 
-        <div className="quote-grid">
-          {/* Form Container */}
+        {/* Centered Single Form Layout */}
+        <div className="quote-form-wrapper">
           <div className="quote-form-card glass-panel">
             {formSubmitted ? (
               <div className="form-success-state">
@@ -136,24 +126,6 @@ const QuoteForm = ({ selectedProduct }) => {
                   </div>
                 )}
 
-                <div className="success-actions">
-                  <a 
-                    href={`mailto:export@purepackglobal.com?subject=Inquiry Details: ${formData.companyName}`}
-                    className="btn btn-primary"
-                  >
-                    <Mail size={18} />
-                    <span>Send Follow-Up Email</span>
-                  </a>
-
-                  {/* 
-                  WhatsApp button commented out for now
-                  <button onClick={handleWhatsAppDirect} className="btn btn-gold">
-                    <MessageSquare size={18} />
-                    <span>Chat on WhatsApp</span>
-                  </button> 
-                  */}
-                </div>
-
                 <button 
                   onClick={() => {
                     setFormSubmitted(false);
@@ -168,7 +140,7 @@ const QuoteForm = ({ selectedProduct }) => {
                       message: ''
                     });
                   }}
-                  className="btn btn-outline-light btn-reset"
+                  className="btn btn-primary btn-reset"
                 >
                   Submit Another Requirement
                 </button>
@@ -216,7 +188,7 @@ const QuoteForm = ({ selectedProduct }) => {
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label light">Phone Number *</label>
+                    <label className="form-label light">Phone / WhatsApp *</label>
                     <input 
                       type="text"
                       name="phoneWhatsApp"
@@ -307,43 +279,6 @@ const QuoteForm = ({ selectedProduct }) => {
               </form>
             )}
           </div>
-
-          {/* Quick Direct Communication Panel */}
-          <div className="quick-contact-panel glass-card">
-            <h3 className="panel-title">Official Corporate Inbox</h3>
-            <p className="panel-text">
-              Directly connect with our export desk for urgent trade inquiries or bulk specifications.
-            </p>
-
-            <div className="direct-buttons">
-              <a 
-                href="mailto:export@purepackglobal.com"
-                className="btn btn-secondary direct-btn"
-              >
-                <Mail size={20} className="btn-icon-gold" />
-                <div className="btn-text-block">
-                  <span className="btn-label">Email Us Directly</span>
-                  <span className="btn-value">export@purepackglobal.com</span>
-                </div>
-              </a>
-
-              {/* 
-              WhatsApp desk button commented out for now
-              <button onClick={handleWhatsAppDirect} className="btn btn-secondary direct-btn">
-                <MessageSquare size={20} className="btn-icon-teal" />
-                <div className="btn-text-block">
-                  <span className="btn-label">WhatsApp Trade Desk</span>
-                  <span className="btn-value">Launch Instant Chat</span>
-                </div>
-              </button>
-              */}
-            </div>
-
-            <div className="inquiry-hours">
-              <Globe size={18} className="hours-icon" />
-              <span>Direct delivery to export@purepackglobal.com with 24-hour response window.</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -354,16 +289,13 @@ const QuoteForm = ({ selectedProduct }) => {
           border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .quote-grid {
-          display: grid;
-          grid-template-columns: 1.8fr 1fr;
-          gap: 2.5rem;
-          margin-top: 3.5rem;
-          align-items: start;
+        .quote-form-wrapper {
+          max-width: 820px;
+          margin: 3.5rem auto 0 auto;
         }
 
         .quote-form-card {
-          padding: 2.5rem;
+          padding: 2.75rem;
         }
 
         .form-row {
@@ -402,6 +334,7 @@ const QuoteForm = ({ selectedProduct }) => {
         .btn-loading-state {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 0.6rem;
         }
 
@@ -455,106 +388,15 @@ const QuoteForm = ({ selectedProduct }) => {
           margin-bottom: 1.5rem;
         }
 
-        .success-actions {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          margin: 1.5rem 0;
-          flex-wrap: wrap;
-        }
-
-        .btn-outline-light {
-          background: transparent;
-          color: #94A3B8;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-outline-light:hover {
-          color: #FFFFFF;
-          border-color: #00B4D8;
-        }
-
         .btn-reset {
           margin-top: 1rem;
-          font-size: 0.875rem;
-        }
-
-        .quick-contact-panel {
-          padding: 2.25rem;
-        }
-
-        .panel-title {
-          font-size: 1.3rem;
-          color: #F8FAFC;
-          margin-bottom: 0.5rem;
-        }
-
-        .panel-text {
           font-size: 0.95rem;
-          color: #94A3B8;
-          line-height: 1.6;
-          margin-bottom: 2rem;
+          padding: 0.75rem 1.75rem;
         }
 
-        .direct-buttons {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-          margin-bottom: 2rem;
-        }
-
-        .direct-btn {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          padding: 1.1rem;
-          justify-content: flex-start;
-          text-align: left;
-        }
-
-        .btn-icon-gold {
-          color: #D4AF37;
-        }
-
-        .btn-icon-teal {
-          color: #00B4D8;
-        }
-
-        .btn-text-block {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .btn-label {
-          font-size: 0.775rem;
-          color: #94A3B8;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .btn-value {
-          font-size: 0.95rem;
-          color: #F8FAFC;
-          font-weight: 600;
-        }
-
-        .inquiry-hours {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          font-size: 0.85rem;
-          color: #64748B;
-          padding-top: 1.25rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .hours-icon {
-          color: #00B4D8;
-        }
-
-        @media (max-width: 992px) {
-          .quote-grid {
-            grid-template-columns: 1fr;
+        @media (max-width: 768px) {
+          .quote-form-card {
+            padding: 1.75rem;
           }
           .form-row {
             grid-template-columns: 1fr;

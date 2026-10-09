@@ -7,8 +7,8 @@ import WhyChooseUs from './components/WhyChooseUs';
 import GlobalTrade from './components/GlobalTrade';
 import Quality from './components/Quality';
 import QuoteForm from './components/QuoteForm';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState('');
@@ -28,9 +28,9 @@ function App() {
         <GlobalTrade />
         <Quality />
         <QuoteForm selectedProduct={selectedProduct} />
-        <Contact />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,8 +14,7 @@ const Navbar = () => {
         setIsScrolled(false);
       }
 
-      // Scroll spy for active section highlight
-      const sections = ['home', 'about', 'products', 'why-us', 'global-trade', 'contact'];
+      const sections = ['home', 'about', 'products', 'why-us', 'global-trade', 'quote'];
       const scrollPosition = window.scrollY + 120;
 
       for (const sectionId of sections) {
@@ -24,7 +23,7 @@ const Navbar = () => {
           const top = element.offsetTop;
           const height = element.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
+            setActiveSection(sectionId === 'quote' ? 'contact' : sectionId);
             break;
           }
         }
@@ -41,7 +40,7 @@ const Navbar = () => {
     { name: 'Products', href: '#products', id: 'products' },
     { name: 'Why Us', href: '#why-us', id: 'why-us' },
     { name: 'Global Trade', href: '#global-trade', id: 'global-trade' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: 'Contact', href: '#quote', id: 'contact' },
   ];
 
   const handleNavClick = (e, href) => {
@@ -86,18 +85,8 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        {/* Action Button */}
+        {/* Mobile Toggle Button Only */}
         <div className="navbar-actions">
-          <a 
-            href="#quote" 
-            onClick={(e) => handleNavClick(e, '#quote')} 
-            className="btn btn-primary btn-nav-quote"
-          >
-            <span>Request a Quote</span>
-            <ArrowRight size={16} />
-          </a>
-
-          {/* Mobile Menu Toggle Button */}
           <button 
             className="mobile-toggle-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -124,16 +113,6 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className="mobile-drawer-footer">
-            <a 
-              href="#quote" 
-              onClick={(e) => handleNavClick(e, '#quote')} 
-              className="btn btn-primary btn-full-width"
-            >
-              <span>Request a Quote</span>
-              <ArrowRight size={18} />
-            </a>
-          </div>
         </div>
       </div>
 
@@ -188,14 +167,14 @@ const Navbar = () => {
         .nav-list {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 2.25rem;
           list-style: none;
         }
 
         .nav-link {
-          color: rgba(248, 250, 252, 0.8);
+          color: rgba(248, 250, 252, 0.85);
           font-weight: 500;
-          font-size: 0.95rem;
+          font-size: 0.975rem;
           position: relative;
           padding: 0.4rem 0;
           transition: color 0.25s ease;
@@ -224,7 +203,6 @@ const Navbar = () => {
         .navbar-actions {
           display: flex;
           align-items: center;
-          gap: 1rem;
         }
 
         .mobile-toggle-btn {
@@ -257,7 +235,7 @@ const Navbar = () => {
         }
 
         .mobile-menu-drawer.open {
-          max-height: 400px;
+          max-height: 350px;
         }
 
         .mobile-menu-content {
@@ -288,10 +266,6 @@ const Navbar = () => {
           font-weight: 600;
         }
 
-        .btn-full-width {
-          width: 100%;
-        }
-
         @media (max-width: 992px) {
           .desktop-nav {
             display: none;
@@ -301,9 +275,6 @@ const Navbar = () => {
           }
           .mobile-menu-drawer {
             display: block;
-          }
-          .btn-nav-quote {
-            display: none;
           }
         }
       `}</style>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, ArrowUp } from 'lucide-react';
+import { Mail, ArrowUp, MessageSquare } from 'lucide-react';
 
 const Footer = () => {
   const scrollToTop = (e) => {
@@ -39,11 +39,7 @@ const Footer = () => {
             <p className="footer-brand-text">
               An emerging B2B global trading enterprise exporting premium rice, grocery commodities, industrial packaging, and custom trade solutions to Dubai (UAE), Canada, the UK, and global markets.
             </p>
-            <div className="footer-email-pill">
-              <Mail size={16} className="pill-icon" />
-              <a href="mailto:export@purepackglobal.com">export@purepackglobal.com</a>
-            </div>
-          </div>
+        </div>
 
           {/* Column 2: Quick Navigation */}
           <div className="footer-col">
@@ -92,8 +88,6 @@ const Footer = () => {
           <div className="legal-placeholders">
             <span>export@purepackglobal.com</span>
             <span className="dot-divider">•</span>
-            <span>Privacy Policy</span>
-            <span className="dot-divider">•</span>
             <span>Terms of Trade</span>
           </div>
         </div>
@@ -126,6 +120,13 @@ const Footer = () => {
           color: #94A3B8;
           line-height: 1.6;
           margin-bottom: 1.5rem;
+        }
+
+        .footer-pills-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          align-items: flex-start;
         }
 
         .footer-email-pill {

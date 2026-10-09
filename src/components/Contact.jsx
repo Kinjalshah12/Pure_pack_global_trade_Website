@@ -1,73 +1,26 @@
 import React from 'react';
-import { Mail, MapPin, Phone, Clock, Globe } from 'lucide-react';
+import { Mail, MapPin, Phone, MessageSquare, Clock, Globe, ShieldCheck } from 'lucide-react';
 
 const Contact = () => {
+  const whatsappNumber = "919316587746";
+  const whatsappDisplay = "+91 93165 87746";
+
+  const handleWhatsAppClick = () => {
+    const text = encodeURIComponent(
+      "Hello Pure Pack Global Trade Team,\nI am contacting you from your website for a B2B export inquiry."
+    );
+    window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank');
+  };
+
   return (
     <section id="contact" className="section-spacing contact-section">
       <div className="container">
-        <div className="text-center">
-          <div className="section-badge">
-            <Mail size={16} />
-            <span>Corporate Contact</span>
-          </div>
-          <h2 className="section-title">
-            Connect With Our Trade Desk
-          </h2>
-          <p className="section-subtitle">
-            We welcome inquiries from buyers, suppliers, and commercial partners in Dubai, UK, Canada, and global markets.
-          </p>
-        </div>
-
-        <div className="contact-cards-grid">
-          {/* Card 1: Official Corporate Email */}
-          <div className="contact-card light-card">
-            <div className="contact-icon-box">
-              <Mail size={26} className="contact-icon" />
-            </div>
-            <h3>Official Corporate Email</h3>
-            <p className="contact-subtitle-text">Primary Channel for Trade Inquiries</p>
-            <a 
-              href="mailto:export@purepackglobal.com" 
-              className="contact-link-highlight"
-            >
-              export@purepackglobal.com
-            </a>
-            <span className="contact-badge-status">Active Inbox</span>
-          </div>
-
-          {/* Card 2: Registered Headquarters Placeholder */}
-          <div className="contact-card light-card">
-            <div className="contact-icon-box">
-              <MapPin size={26} className="contact-icon" />
-            </div>
-            <h3>Corporate Office</h3>
-            <p className="contact-subtitle-text">Physical Address Confirmation</p>
-            <div className="placeholder-tag-box">
-              <code>[Company Address]</code>
-            </div>
-            <span className="contact-badge-info">Pending Final Confirmation</span>
-          </div>
-
-          {/* Card 3: Direct Phone Placeholder */}
-          <div className="contact-card light-card">
-            <div className="contact-icon-box">
-              <Phone size={26} className="contact-icon" />
-            </div>
-            <h3>Phone Line</h3>
-            <p className="contact-subtitle-text">Direct Trade Desk Numbers</p>
-            <div className="placeholder-tag-box">
-              <code>[Phone Number]</code>
-              {/* <code>[WhatsApp Number]</code> */}
-            </div>
-            <span className="contact-badge-info">Pending Number Setup</span>
-          </div>
-        </div>
 
         {/* Operating Hours Note */}
         <div className="contact-footer-note light-card">
           <Clock size={20} className="clock-icon" />
           <span>
-            Standard Business Operating Hours: <strong>Monday to Saturday (09:00 - 18:00 UTC)</strong>. Official inquiries sent to <strong>export@purepackglobal.com</strong> are monitored continuously.
+            Standard Business Operating Hours: <strong>Monday to Saturday (09:00 - 18:00 UTC)</strong>. WhatsApp inquiries to <strong>{whatsappDisplay}</strong> and emails to <strong>export@purepackglobal.com</strong> are monitored continuously.
           </span>
         </div>
       </div>
@@ -94,6 +47,11 @@ const Contact = () => {
           align-items: center;
         }
 
+        .highlight-card {
+          border-color: rgba(37, 211, 102, 0.4);
+          background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+        }
+
         .contact-icon-box {
           width: 60px;
           height: 60px;
@@ -106,8 +64,17 @@ const Contact = () => {
           margin-bottom: 1.25rem;
         }
 
+        .wa-icon-box {
+          background: rgba(37, 211, 102, 0.12);
+          border-color: rgba(37, 211, 102, 0.3);
+        }
+
         .contact-icon {
           color: #0A9396;
+        }
+
+        .wa-contact-icon {
+          color: #25D366;
         }
 
         .contact-card h3 {
@@ -128,11 +95,39 @@ const Contact = () => {
           color: #00B4D8;
           margin-bottom: 1rem;
           transition: color 0.2s ease;
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+
+        .wa-link-highlight {
+          color: #128C7E;
         }
 
         .contact-link-highlight:hover {
           color: #0B132B;
           text-decoration: underline;
+        }
+
+        .btn-wa-action {
+          background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+          color: #FFFFFF;
+          font-size: 0.875rem;
+          padding: 0.6rem 1.2rem;
+          border-radius: 50px;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+          border: none;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+          margin-top: auto;
+        }
+
+        .btn-wa-action:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
         }
 
         .placeholder-tag-box {

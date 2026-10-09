@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ShieldCheck, Globe2, Sparkles, Box, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Globe2, Sparkles, Box } from 'lucide-react';
 
 const Hero = () => {
   const handleScroll = (e, href) => {
@@ -45,7 +45,7 @@ const Hero = () => {
 
           {/* Supporting Subtext */}
           <p className="hero-subtitle">
-            Supporting businesses with reliable sourcing and international trade solutions. Built on transparency, consistency, and long-term commercial partnerships.
+            Exporting premium Rice, Grocery Commodities & Packaging Solutions to Dubai (UAE), United Kingdom (UK), Canada, and international destinations.
           </p>
 
           {/* Call to Actions */}
@@ -72,15 +72,15 @@ const Hero = () => {
           <div className="hero-feature-chips">
             <div className="feature-chip">
               <ShieldCheck size={18} className="chip-icon" />
-              <span>Quality-Oriented Sourcing</span>
+              <span>Direct Sourcing & Quality Sorting</span>
             </div>
             <div className="feature-chip">
               <Globe2 size={18} className="chip-icon" />
-              <span>International Trade Vision</span>
+              <span>Dubai, UK, Canada & Global Reach</span>
             </div>
             <div className="feature-chip">
               <Box size={18} className="chip-icon" />
-              <span>Reliable Business Execution</span>
+              <span>Packaging & Container Logistics</span>
             </div>
           </div>
         </div>
@@ -171,7 +171,7 @@ const Hero = () => {
           line-height: 1.6;
           color: rgba(248, 250, 252, 0.85);
           margin-bottom: 2.25rem;
-          max-width: 720px;
+          max-width: 760px;
           font-weight: 400;
         }
 

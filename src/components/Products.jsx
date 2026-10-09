@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { productCategories } from '../data/products';
-import { ArrowRight, CheckCircle2, PackageCheck } from 'lucide-react';
+import { CheckCircle2, PackageCheck } from 'lucide-react';
 
-const Products = ({ onSelectProductForQuote }) => {
+const Products = () => {
   const [activeTab, setActiveTab] = useState('all');
 
   const categories = [
@@ -16,20 +16,6 @@ const Products = ({ onSelectProductForQuote }) => {
   const filteredProducts = activeTab === 'all'
     ? productCategories
     : productCategories.filter(p => p.id === activeTab);
-
-  const handleEnquireClick = (productName) => {
-    if (onSelectProductForQuote) {
-      onSelectProductForQuote(productName);
-    }
-    const quoteSection = document.getElementById('quote');
-    if (quoteSection) {
-      const offsetTop = quoteSection.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   return (
     <section id="products" className="section-spacing products-section">
@@ -62,7 +48,7 @@ const Products = ({ onSelectProductForQuote }) => {
           </div>
         </div>
 
-        {/* Product Cards Grid */}
+        {/* Compact Product Cards Grid */}
         <div className="products-grid">
           {filteredProducts.map((product) => (
             <div key={product.id} className="product-card light-card">
@@ -80,11 +66,11 @@ const Products = ({ onSelectProductForQuote }) => {
                 <p className="product-tagline">{product.tagline}</p>
                 <p className="product-description">{product.description}</p>
 
-                {/* Key Spec Highlights */}
+                {/* Compact Spec Highlights */}
                 <div className="product-specs">
-                  {product.specifications.slice(0, 4).map((spec, idx) => (
+                  {product.specifications.slice(0, 3).map((spec, idx) => (
                     <div key={idx} className="spec-item">
-                      <CheckCircle2 size={15} className="spec-icon" />
+                      <CheckCircle2 size={13} className="spec-icon" />
                       <span>{spec}</span>
                     </div>
                   ))}
@@ -92,18 +78,10 @@ const Products = ({ onSelectProductForQuote }) => {
 
                 {/* Feature Pills */}
                 <div className="product-tags">
-                  {product.tags.map((tag, tIdx) => (
+                  {product.tags.slice(0, 3).map((tag, tIdx) => (
                     <span key={tIdx} className="product-pill">{tag}</span>
                   ))}
                 </div>
-
-                <button 
-                  onClick={() => handleEnquireClick(product.name)}
-                  className="btn btn-primary btn-product-enquire"
-                >
-                  <span>Enquire for Export Quote</span>
-                  <ArrowRight size={16} />
-                </button>
               </div>
             </div>
           ))}
@@ -115,29 +93,30 @@ const Products = ({ onSelectProductForQuote }) => {
           background: #F8FAFC;
           border-top: 1px solid #E2E8F0;
           border-bottom: 1px solid #E2E8F0;
+          padding: 4.5rem 0;
         }
 
         .products-filter-wrapper {
           display: flex;
           justify-content: center;
-          margin: 2.5rem 0 3rem 0;
+          margin: 2rem 0 2.5rem 0;
         }
 
         .filter-tabs {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
           background: #E2E8F0;
-          padding: 0.35rem;
+          padding: 0.3rem;
           border-radius: 50px;
           flex-wrap: wrap;
           justify-content: center;
         }
 
         .filter-tab-btn {
-          padding: 0.65rem 1.4rem;
+          padding: 0.5rem 1.1rem;
           border-radius: 50px;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 600;
           color: #475569;
           background: transparent;
@@ -156,22 +135,24 @@ const Products = ({ onSelectProductForQuote }) => {
           box-shadow: 0 4px 12px rgba(11, 19, 43, 0.25);
         }
 
+        /* 4 Column Compact Grid Layout */
         .products-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 2rem;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.25rem;
         }
 
         .product-card {
           display: flex;
           flex-direction: column;
           overflow: hidden;
-          border-radius: 16px;
+          border-radius: 12px;
+          background: #FFFFFF;
         }
 
         .product-image-container {
           position: relative;
-          height: 240px;
+          height: 160px;
           overflow: hidden;
         }
 
@@ -179,7 +160,7 @@ const Products = ({ onSelectProductForQuote }) => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.5s ease;
         }
 
         .product-card:hover .product-image {
@@ -188,95 +169,108 @@ const Products = ({ onSelectProductForQuote }) => {
 
         .product-category-tag {
           position: absolute;
-          top: 1rem;
-          left: 1rem;
-          background: rgba(11, 19, 43, 0.85);
-          backdrop-filter: blur(8px);
+          top: 0.75rem;
+          left: 0.75rem;
+          background: rgba(11, 19, 43, 0.88);
+          backdrop-filter: blur(6px);
           color: #00B4D8;
-          font-size: 0.8rem;
+          font-size: 0.725rem;
           font-weight: 700;
-          padding: 0.35rem 0.85rem;
+          padding: 0.25rem 0.65rem;
           border-radius: 50px;
           border: 1px solid rgba(0, 180, 216, 0.3);
-          letter-spacing: 0.03em;
+          letter-spacing: 0.02em;
         }
 
         .product-card-body {
-          padding: 1.75rem;
+          padding: 1.15rem;
           display: flex;
           flex-direction: column;
           flex-grow: 1;
         }
 
         .product-name {
-          font-size: 1.4rem;
+          font-size: 1.15rem;
           color: #0F172A;
-          margin-bottom: 0.3rem;
+          margin-bottom: 0.2rem;
+          line-height: 1.3;
         }
 
         .product-tagline {
-          font-size: 0.9rem;
+          font-size: 0.8rem;
           color: #0A9396;
           font-weight: 600;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
+          line-height: 1.35;
         }
 
         .product-description {
-          font-size: 0.95rem;
+          font-size: 0.85rem;
           color: #475569;
-          line-height: 1.6;
-          margin-bottom: 1.25rem;
+          line-height: 1.5;
+          margin-bottom: 1rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
         .product-specs {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
-          margin-bottom: 1.25rem;
-          padding: 0.85rem;
+          gap: 0.4rem;
+          margin-bottom: 1rem;
+          padding: 0.75rem;
           background: #F1F5F9;
           border-radius: 8px;
+          border: 1px solid #E2E8F0;
         }
 
         .spec-item {
           display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.85rem;
+          align-items: flex-start;
+          gap: 0.45rem;
+          font-size: 0.775rem;
           color: #334155;
           font-weight: 500;
+          line-height: 1.35;
         }
 
         .spec-icon {
           color: #0A9396;
           flex-shrink: 0;
+          margin-top: 0.1rem;
         }
 
         .product-tags {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
           flex-wrap: wrap;
-          margin-bottom: 1.5rem;
           margin-top: auto;
         }
 
         .product-pill {
           background: #E2E8F0;
           color: #475569;
-          font-size: 0.775rem;
+          font-size: 0.725rem;
           font-weight: 600;
-          padding: 0.25rem 0.65rem;
+          padding: 0.2rem 0.5rem;
           border-radius: 4px;
         }
 
-        .btn-product-enquire {
-          width: 100%;
+        @media (max-width: 1200px) {
+          .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 640px) {
           .products-grid {
             grid-template-columns: 1fr;
+          }
+          .product-image-container {
+            height: 180px;
           }
         }
       `}</style>
