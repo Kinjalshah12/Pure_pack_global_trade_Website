@@ -60,7 +60,7 @@ const QuoteForm = ({ selectedProduct }) => {
         'Email: export@purepackglobal.com'
       ].join('\n');
 
-      const response = await fetch('https://formsubmit.co/ajax/kinjalshah1228@gmail.com', {
+      const response = await fetch('https://formsubmit.co/ajax/export@purepackglobal.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,9 +75,25 @@ const QuoteForm = ({ selectedProduct }) => {
         })
       });
 
-      const result = await response.json();
-      if (!response.ok || (result.success !== true && result.success !== 'true')) {
-        throw new Error(result.message || `FormSubmit request failed (${response.status})`);
+      const responseText = await response.text();
+
+      console.log('FormSubmit HTTP status:', response.status);
+      console.log('FormSubmit response:', responseText);
+
+      if (!response.ok) {
+        throw new Error(`FormSubmit HTTP error: ${response.status}`);
+      }
+
+      let result;
+
+      try {
+        result = JSON.parse(responseText);
+      } catch {
+        throw new Error('FormSubmit returned an unexpected response.');
+      }
+
+      if (result.success !== true && result.success !== 'true') {
+        throw new Error(result.message || 'FormSubmit rejected the submission.');
       }
 
       setIsSubmitting(false);
@@ -101,7 +117,7 @@ const QuoteForm = ({ selectedProduct }) => {
             Let's Discuss Your Export Requirements
           </h2>
           <p className="section-subtitle light">
-            Fill out the requirement form below to send an immediate inquiry directly to <strong>kinjalshah1228@gmail.com</strong>.
+            Fill out the requirement form below to send an immediate inquiry directly to <strong>export@purepackglobal.com</strong>.
           </p>
         </div>
 
@@ -113,7 +129,7 @@ const QuoteForm = ({ selectedProduct }) => {
                 <CheckCircle2 size={64} className="success-icon" />
                 <h3>Inquiry Sent Directly!</h3>
                 <p className="success-main-desc">
-                  Thank you, <strong>{formData.fullName}</strong>. Your export inquiry for <strong>{formData.productCategory}</strong> has been sent to <strong>kinjalshah1228@gmail.com</strong>.
+                  Thank you, <strong>{formData.fullName}</strong>. Your export inquiry for <strong>{formData.productCategory}</strong> has been sent to <strong>export@purepackglobal.com</strong>.
                 </p>
                 <p className="success-subtext">
                   Our commercial team will review your specifications and contact you at <strong>{formData.email}</strong> within 24 business hours.
