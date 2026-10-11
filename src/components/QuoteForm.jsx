@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Mail, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { productCategories } from '../data/products';
 
 const QuoteForm = ({ selectedProduct }) => {
@@ -16,7 +16,7 @@ const QuoteForm = ({ selectedProduct }) => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [sendError, setSendError] = useState(false);
+  const [sendError, setSendError] = useState('');
 
   useEffect(() => {
     if (selectedProduct) {
@@ -32,11 +32,35 @@ const QuoteForm = ({ selectedProduct }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSendError(false);
+    setSendError('');
 
     try {
-      // Direct background email delivery via FormSubmit AJAX API
-      const response = await fetch('https://formsubmit.co/ajax/export@purepackglobal.com', {
+      const inquiryMessage = [
+        'Dear Pure Pack Global Trade Team,',
+        '',
+        'A new business enquiry has been submitted through the company website. Please review the details below and follow up with the potential customer.',
+        '',
+        'ENQUIRY DETAILS',
+        '',
+        `Full Name: ${formData.fullName}`,
+        `Company Name: ${formData.companyName}`,
+        `Email Address: ${formData.email}`,
+        `Phone / WhatsApp: ${formData.phoneWhatsApp}`,
+        `Destination Country: ${formData.country}`,
+        `Product Category: ${formData.productCategory}`,
+        `Estimated Quantity: ${formData.quantity || 'Not Specified'}`,
+        `Specification Details: ${formData.message}`,
+        '',
+        'NEXT STEPS',
+        '',
+        'Please contact the customer using the provided email address or phone number to discuss their requirements and provide the necessary product information or quotation.',
+        '',
+        'Thank you,',
+        'Pure Pack Global Trade',
+        'Email: export@purepackglobal.com'
+      ].join('\n');
+
+      const response = await fetch('https://formsubmit.co/ajax/kinjalshah1228@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,49 +68,25 @@ const QuoteForm = ({ selectedProduct }) => {
         },
         body: JSON.stringify({
           _subject: `Export Inquiry: ${formData.productCategory} - ${formData.companyName}`,
-          _template: 'table',
+          _replyto: formData.email,
+          _template: 'basic',
           _captcha: 'false',
-          'Full Name': formData.fullName,
-          'Company Name': formData.companyName,
-          'Email Address': formData.email,
-          'Phone / WhatsApp': formData.phoneWhatsApp,
-          'Destination Country': formData.country,
-          'Product Category': formData.productCategory,
-          'Estimated Quantity': formData.quantity || 'Not Specified',
-          'Specification Details': formData.message
+          message: inquiryMessage
         })
       });
 
-      if (response.ok) {
-        setIsSubmitting(false);
-        setFormSubmitted(true);
-      } else {
-        triggerMailtoFallback();
+      const result = await response.json();
+      if (!response.ok || (result.success !== true && result.success !== 'true')) {
+        throw new Error(result.message || `FormSubmit request failed (${response.status})`);
       }
+
+      setIsSubmitting(false);
+      setFormSubmitted(true);
     } catch (err) {
-      console.warn("Direct API send fallback triggered:", err);
-      triggerMailtoFallback();
+      console.error('Inquiry email delivery failed:', err);
+      setIsSubmitting(false);
+      setSendError('Your inquiry could not be sent. Please try again in a moment.');
     }
-  };
-
-  const triggerMailtoFallback = () => {
-    setIsSubmitting(false);
-    setFormSubmitted(true);
-    setSendError(true);
-
-    const emailSubject = encodeURIComponent(`B2B Trade Inquiry: ${formData.productCategory} - ${formData.companyName}`);
-    const emailBody = encodeURIComponent(
-      `Full Name: ${formData.fullName}\n` +
-      `Company: ${formData.companyName}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone/WhatsApp: ${formData.phoneWhatsApp}\n` +
-      `Destination: ${formData.country}\n` +
-      `Product Category: ${formData.productCategory}\n` +
-      `Estimated Quantity: ${formData.quantity}\n\n` +
-      `Message Details:\n${formData.message}`
-    );
-
-    window.location.href = `mailto:export@purepackglobal.com?subject=${emailSubject}&body=${emailBody}`;
   };
 
   return (
@@ -101,7 +101,7 @@ const QuoteForm = ({ selectedProduct }) => {
             Let's Discuss Your Export Requirements
           </h2>
           <p className="section-subtitle light">
-            Fill out the requirement form below to send an immediate inquiry directly to our trade desk at <strong>export@purepackglobal.com</strong>.
+            Fill out the requirement form below to send an immediate inquiry directly to <strong>kinjalshah1228@gmail.com</strong>.
           </p>
         </div>
 
@@ -113,18 +113,11 @@ const QuoteForm = ({ selectedProduct }) => {
                 <CheckCircle2 size={64} className="success-icon" />
                 <h3>Inquiry Sent Directly!</h3>
                 <p className="success-main-desc">
-                  Thank you, <strong>{formData.fullName}</strong>. Your export inquiry for <strong>{formData.productCategory}</strong> has been transmitted directly to <strong>export@purepackglobal.com</strong>.
+                  Thank you, <strong>{formData.fullName}</strong>. Your export inquiry for <strong>{formData.productCategory}</strong> has been sent to <strong>kinjalshah1228@gmail.com</strong>.
                 </p>
                 <p className="success-subtext">
                   Our commercial team will review your specifications and contact you at <strong>{formData.email}</strong> within 24 business hours.
                 </p>
-
-                {sendError && (
-                  <div className="fallback-notice">
-                    <AlertCircle size={18} />
-                    <span>Your local email client was opened as a backup confirmation.</span>
-                  </div>
-                )}
 
                 <button 
                   onClick={() => {
@@ -258,6 +251,13 @@ const QuoteForm = ({ selectedProduct }) => {
                     className="form-textarea dark-input"
                   ></textarea>
                 </div>
+
+                {sendError && (
+                  <div className="fallback-notice" role="alert">
+                    <AlertCircle size={18} />
+                    <span>{sendError}</span>
+                  </div>
+                )}
 
                 <button 
                   type="submit" 

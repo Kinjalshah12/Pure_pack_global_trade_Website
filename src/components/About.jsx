@@ -133,6 +133,12 @@ const About = () => {
           color: #F8FAFC;
           font-size: 0.95rem;
           font-weight: 500;
+          transition: transform 0.25s ease;
+        }
+
+        .highlight-item:hover {
+          transform: translateX(4px);
+          color: #00B4D8;
         }
 
         .check-icon {
@@ -155,12 +161,12 @@ const About = () => {
           width: 100%;
           height: 380px;
           object-fit: cover;
-          border-radius: 10px;
+          border-radius: 12px;
           transition: transform 0.6s ease;
         }
 
         .about-image-wrapper:hover .about-image {
-          transform: scale(1.03);
+          transform: scale(1.04);
         }
 
         .pillars-grid {
@@ -172,28 +178,47 @@ const About = () => {
         .pillar-card {
           padding: 2rem 1.5rem;
           text-align: left;
+          position: relative;
         }
 
         .pillar-icon-wrapper {
-          width: 56px;
-          height: 56px;
-          border-radius: 12px;
+          width: 58px;
+          height: 58px;
+          border-radius: 14px;
           background: rgba(0, 180, 216, 0.12);
           border: 1px solid rgba(0, 180, 216, 0.25);
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 1.25rem;
+          transition: all 0.3s ease;
+        }
+
+        .pillar-card:hover .pillar-icon-wrapper {
+          background: linear-gradient(135deg, #00B4D8 0%, #0A9396 100%);
+          border-color: #00B4D8;
+          transform: scale(1.1) rotate(4deg);
+          box-shadow: 0 8px 20px rgba(0, 180, 216, 0.35);
         }
 
         .pillar-icon {
           color: #00B4D8;
+          transition: color 0.3s ease;
+        }
+
+        .pillar-card:hover .pillar-icon {
+          color: #FFFFFF;
         }
 
         .pillar-title {
           font-size: 1.2rem;
           color: #F8FAFC;
           margin-bottom: 0.6rem;
+          transition: color 0.3s ease;
+        }
+
+        .pillar-card:hover .pillar-title {
+          color: #00B4D8;
         }
 
         .pillar-text {
@@ -218,6 +243,26 @@ const About = () => {
           }
           .about-image {
             height: 280px;
+          }
+          .about-text-content .section-title {
+            font-size: clamp(1.2rem, 5vw, 1.4rem);
+          }
+          .about-lead-text {
+            font-size: 1rem;
+            line-height: 1.5;
+          }
+          .about-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+          }
+          .highlight-item {
+            font-size: 0.85rem;
+          }
+          .pillar-title {
+            font-size: 1.05rem;
+          }
+          .pillar-text {
+            font-size: 0.85rem;
           }
         }
       `}</style>

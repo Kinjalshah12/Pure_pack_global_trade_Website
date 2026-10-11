@@ -31,11 +31,11 @@ const Hero = () => {
         <div className="hero-content">
           {/* Company Badge */}
           <div className="section-badge gold animate-fade-in">
-            <Sparkles size={15} />
+            <Sparkles size={14} />
             <span>Emerging B2B Global Trade Partner</span>
           </div>
 
-          {/* Main Title */}
+          {/* Main Title - Proportionate Font Size */}
           <h1 className="hero-title">
             Pure Pack Global Trade
             <span className="hero-title-highlight">
@@ -71,15 +71,15 @@ const Hero = () => {
           {/* Trust Value Feature Chips */}
           <div className="hero-feature-chips">
             <div className="feature-chip">
-              <ShieldCheck size={18} className="chip-icon" />
+              <ShieldCheck size={17} className="chip-icon" />
               <span>Direct Sourcing & Quality Sorting</span>
             </div>
             <div className="feature-chip">
-              <Globe2 size={18} className="chip-icon" />
+              <Globe2 size={17} className="chip-icon" />
               <span>Dubai, UK, Canada & Global Reach</span>
             </div>
             <div className="feature-chip">
-              <Box size={18} className="chip-icon" />
+              <Box size={17} className="chip-icon" />
               <span>Packaging & Container Logistics</span>
             </div>
           </div>
@@ -89,11 +89,11 @@ const Hero = () => {
       <style>{`
         .hero-section {
           position: relative;
-          min-height: 100vh;
+          min-height: 90vh;
           display: flex;
           align-items: center;
-          padding-top: 7.5rem;
-          padding-bottom: 5rem;
+          padding-top: 7rem;
+          padding-bottom: 4.5rem;
           overflow: hidden;
           background: #0B132B;
         }
@@ -146,68 +146,69 @@ const Hero = () => {
         }
 
         .hero-content {
-          max-width: 860px;
+          max-width: 820px;
         }
 
         .hero-title {
-          font-size: 3.5rem;
+          font-size: 2.65rem;
           font-weight: 800;
           color: #FFFFFF;
-          line-height: 1.12;
-          margin-bottom: 1.25rem;
+          line-height: 1.18;
+          margin-bottom: 1.1rem;
           letter-spacing: -0.025em;
+          text-wrap: balance;
         }
 
         .hero-title-highlight {
           display: block;
-          margin-top: 0.4rem;
+          margin-top: 0.35rem;
           background: linear-gradient(135deg, #00B4D8 0%, #FFFFFF 60%, #D4AF37 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-          font-size: 1.25rem;
+          font-size: 1.125rem;
           line-height: 1.6;
           color: rgba(248, 250, 252, 0.85);
-          margin-bottom: 2.25rem;
-          max-width: 760px;
+          margin-bottom: 2rem;
+          max-width: 720px;
           font-weight: 400;
         }
 
         .hero-cta-group {
           display: flex;
           align-items: center;
-          gap: 1.25rem;
-          margin-bottom: 3.5rem;
+          gap: 1.1rem;
+          margin-bottom: 3rem;
           flex-wrap: wrap;
         }
 
         .btn-hero {
-          padding: 1rem 2.2rem;
-          font-size: 1.05rem;
+          padding: 0.9rem 2rem;
+          font-size: 0.975rem;
         }
 
         .hero-feature-chips {
           display: flex;
           align-items: center;
-          gap: 1.25rem;
+          gap: 1.1rem;
           flex-wrap: wrap;
-          padding-top: 1.5rem;
+          padding-top: 1.25rem;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .feature-chip {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
+          gap: 0.55rem;
           background: rgba(21, 30, 56, 0.6);
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 0.6rem 1.1rem;
+          padding: 0.55rem 1rem;
           border-radius: 50px;
           color: #F8FAFC;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 500;
         }
 
@@ -217,16 +218,19 @@ const Hero = () => {
 
         @media (max-width: 992px) {
           .hero-title {
-            font-size: 2.75rem;
+            font-size: 2rem;
           }
           .hero-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
           }
         }
 
         @media (max-width: 576px) {
           .hero-title {
-            font-size: 2.1rem;
+            font-size: clamp(1.35rem, 5.5vw, 1.55rem);
+          }
+          .hero-subtitle {
+            font-size: 0.9rem;
           }
           .btn-hero {
             width: 100%;

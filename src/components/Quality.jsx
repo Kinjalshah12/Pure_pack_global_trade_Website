@@ -1,6 +1,6 @@
 import React from 'react';
 import { qualityCommitments } from '../data/products';
-import { Award, ShieldCheck, FileCheck, CheckCircle2, Layers } from 'lucide-react';
+import { Award, ShieldCheck } from 'lucide-react';
 
 const Quality = () => {
   return (
@@ -33,10 +33,10 @@ const Quality = () => {
             ))}
           </div>
 
-          {/* Commitment Notice Panel */}
+          {/* Commitment Notice Banner */}
           <div className="quality-assurance-banner">
             <div className="assurance-icon-box">
-              <ShieldCheck size={36} className="assurance-icon" />
+              <ShieldCheck size={38} className="assurance-icon" />
             </div>
             <div className="assurance-text">
               <h3>Our Operational Promise</h3>
@@ -66,25 +66,45 @@ const Quality = () => {
         }
 
         .quality-card {
-          padding: 2rem 1.5rem;
+          padding: 2.25rem 1.75rem;
           position: relative;
           display: flex;
           flex-direction: column;
+          border-radius: 14px;
+          border: 1px solid #E2E8F0;
+          transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .quality-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(0, 180, 216, 0.4);
+          box-shadow: 0 16px 36px rgba(0, 180, 216, 0.15);
         }
 
         .card-badge-num {
           font-family: var(--font-heading);
-          font-size: 2.2rem;
+          font-size: 2.4rem;
           font-weight: 800;
           color: #00B4D8;
           opacity: 0.35;
           margin-bottom: 0.75rem;
+          transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .quality-card:hover .card-badge-num {
+          opacity: 0.9;
+          color: #0A9396;
         }
 
         .quality-card-title {
           font-size: 1.25rem;
           color: #0F172A;
           margin-bottom: 0.5rem;
+          transition: color 0.3s ease;
+        }
+
+        .quality-card:hover .quality-card-title {
+          color: #00B4D8;
         }
 
         .quality-card-detail {
@@ -95,26 +115,40 @@ const Quality = () => {
 
         .quality-assurance-banner {
           background: linear-gradient(135deg, #0B132B 0%, #1C2541 100%);
-          border-radius: 16px;
-          padding: 2.5rem;
+          border-radius: 18px;
+          padding: 2.75rem;
           display: flex;
           align-items: center;
           gap: 2rem;
           color: #FFFFFF;
-          box-shadow: 0 10px 30px rgba(11, 19, 43, 0.15);
-          border: 1px solid rgba(0, 180, 216, 0.2);
+          box-shadow: 0 16px 40px rgba(11, 19, 43, 0.2);
+          border: 1px solid rgba(0, 180, 216, 0.25);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .quality-assurance-banner::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -10%;
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, rgba(0, 180, 216, 0.15) 0%, transparent 70%);
+          pointer-events: none;
         }
 
         .assurance-icon-box {
-          width: 70px;
-          height: 70px;
+          width: 72px;
+          height: 72px;
           border-radius: 50%;
           background: rgba(0, 180, 216, 0.15);
-          border: 1px solid rgba(0, 180, 216, 0.3);
+          border: 1px solid rgba(0, 180, 216, 0.35);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          box-shadow: 0 8px 25px rgba(0, 180, 216, 0.2);
         }
 
         .assurance-icon {
@@ -122,15 +156,15 @@ const Quality = () => {
         }
 
         .assurance-text h3 {
-          font-size: 1.35rem;
+          font-size: 1.4rem;
           color: #FFFFFF;
           margin-bottom: 0.4rem;
         }
 
         .assurance-text p {
-          font-size: 1rem;
+          font-size: 1.025rem;
           color: #94A3B8;
-          line-height: 1.6;
+          line-height: 1.65;
         }
 
         @media (max-width: 992px) {

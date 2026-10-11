@@ -122,6 +122,36 @@ const Footer = () => {
           margin-bottom: 1.5rem;
         }
 
+        .footer-contact-details {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          color: #94A3B8;
+          font-size: 0.9rem;
+        }
+
+        .footer-contact-details p {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+          margin: 0;
+        }
+
+        .footer-contact-details strong {
+          color: #F8FAFC;
+          font-weight: 600;
+        }
+
+        .footer-contact-details a {
+          color: #94A3B8;
+          width: fit-content;
+          transition: color 0.2s ease;
+        }
+
+        .footer-contact-details a:hover {
+          color: #00B4D8;
+        }
+
         .footer-pills-group {
           display: flex;
           flex-direction: column;
